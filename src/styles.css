@@ -15,3 +15,25 @@ label {
     margin: 0 auto;
   }
 }
+
+.col-valor {
+  width: 120px !important;
+  text-align: right!important;
+}
+
+.col-data {
+  width: 120px;
+  text-align: center;
+}
+
+.text-center {
+  text-align: center!important;
+}
+
+.text-right {
+  text-align: right!important;
+}
+
+.text-left {
+  text-align: left!important;
+}
