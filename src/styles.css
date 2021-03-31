@@ -17,8 +17,8 @@ label {
 }
 
 .col-valor {
-  width: 120px !important;
-  text-align: right!important;
+  width: 120px;
+  text-align: right;
 }
 
 .col-data {
@@ -27,13 +27,15 @@ label {
 }
 
 .text-center {
-  text-align: center!important;
+  text-align: center;
 }
 
 .text-right {
-  text-align: right!important;
+  text-align: right;
 }
 
 .text-left {
-  text-align: left!important;
+  text-align: left;
 }
+
+
