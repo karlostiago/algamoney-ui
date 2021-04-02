@@ -19,7 +19,6 @@ export class PessoasPesquisaComponent implements OnInit {
       {nome: 'Luíz Pereira',       cidade: 'Curitiba',       estado: 'PR', status: 'Ativo'},
       {nome: 'Vilmar Andrade',     cidade: 'Rio de Janeiro', estado: 'RJ', status: 'Inativo'},
       {nome: 'Paula Maria',        cidade: 'Uberlândia',     estado: 'MG', status: 'Ativo'},
-    ]
+    ];
   }
-
 }
