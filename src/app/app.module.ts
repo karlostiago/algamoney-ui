@@ -7,10 +7,17 @@ import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 
 import { AppComponent } from './app.component';
+import { LancamentosPesquisaComponent } from './components/lancamentos-pesquisa/lancamentos-pesquisa.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { PessoasPesquisaComponent } from './components/pessoas-pesquisa/pessoas-pesquisa.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LancamentosPesquisaComponent,
+    NavbarComponent,
+    PessoasPesquisaComponent
   ],
   imports: [
     BrowserModule,

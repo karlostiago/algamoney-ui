@@ -1,0 +1,16 @@
+<nav class="navbar">
+  <div class="container">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <a href="javascript:;" class="navbar-toggle" (click)="exibirMenu = !exibirMenu"> <i class="pi pi-bars"></i> </a>
+      </div>
+    </div>
+  </div>
+
+  <ul class="navbar-menu" [hidden]="!exibirMenu">
+    <li class="navbar-usuario"> Administrador </li>
+    <li class="navbar-menu-item"><a href="#"> Lançamentos </a></li>
+    <li class="navbar-menu-item"><a href="#"> Pessoas </a></li>
+    <li class="navbar-menu-item"><a href="#"> Logout </a></li>
+  </ul>
+</nav>

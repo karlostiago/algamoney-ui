@@ -18,24 +18,41 @@ label {
 
 .col-valor {
   width: 120px;
-  text-align: right;
+  text-align: right!important;
 }
 
 .col-data {
   width: 120px;
-  text-align: center;
+  text-align: center!important;
 }
 
 .text-center {
-  text-align: center;
+  text-align: center!important;
 }
 
 .text-right {
-  text-align: right;
+  text-align: right!important;
 }
 
 .text-left {
-  text-align: left;
+  text-align: left!important;
+}
+
+.p-datatable-header {
+  text-align: center!important;
+}
+
+@media screen and (max-width: 40rem) {
+  .text-center {
+    text-align: inherit!important;
+  }
+  .text-right {
+    text-align: inherit!important;
+  }
+
+  .last-child {
+    border-bottom: 1px solid var(--surface-d)!important;
+  }
 }
 
 
