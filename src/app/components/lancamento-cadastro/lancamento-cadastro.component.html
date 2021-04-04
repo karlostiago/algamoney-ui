@@ -1,0 +1,54 @@
+<div class="container">
+  <form>
+    <div class="p-grid">
+      <div class="p-col-12">
+        <h1>Novo Lançamento</h1>
+      </div>
+
+      <div class="p-col-12">
+        <p-selectButton [options]="tipos" #tipo></p-selectButton>
+      </div>
+
+      <div class="p-col-6 p-md-3 p-fluid">
+        <label>Vencimento</label>
+        <p-calendar dateFormat="dd/mm/yy" [locale]="pt"></p-calendar>
+      </div>
+
+      <div class="p-col-6 p-md-3 p-fluid">
+        <label>{{ tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento' }}</label>
+        <p-calendar dateFormat="dd/mm/yy" [locale]="pt"></p-calendar>
+      </div>
+
+      <div class="p-col-12 p-md-9 p-fluid">
+        <label>Descrição</label>
+        <input type="text" pInputText />
+      </div>
+
+      <div class="p-col-12 p-md-3 p-fluid">
+        <label>Valor</label>
+        <p-inputNumber [minFractionDigits]="2" [maxFractionDigits]="2" mode="decimal" locale="pt-BR"></p-inputNumber>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-fluid">
+        <label>Categoria</label>
+        <p-dropdown [options]="categorias"></p-dropdown>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-fluid">
+        <label>Pessoa</label>
+        <p-dropdown [options]="pessoas" [filter]="true"></p-dropdown>
+      </div>
+
+      <div class="p-col-12 p-fluid">
+        <label>Observação</label>
+        <textarea pInputTextarea  rows="3"></textarea>
+      </div>
+
+      <div class="p-col-12">
+        <button type="submit" label="Salvar" class="p-mr-1" pButton></button>
+        <button type="button" label="Novo" pButton class="p-button-info p-mr-1"></button>
+        <button type="button" pButton class="p-button-text p-button-plain" label="Voltar"></button>
+      </div>
+    </div>
+  </form>
+</div>
