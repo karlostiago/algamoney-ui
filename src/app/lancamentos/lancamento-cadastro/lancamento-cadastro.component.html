@@ -12,7 +12,7 @@
       <div class="p-col-6 p-md-3 p-fluid">
         <label>Vencimento</label>
         <p-calendar dateFormat="dd/mm/yy" [locale]="pt" required name="vencimento" ngModel #vencimento="ngModel"></p-calendar>
-        <app-message [control]="vencimento" error="required" text="Informe uma data de vencimento"></app-message>
+        <!-- <app-message [control]="vencimento" error="required" text="Informe uma data de vencimento"></app-message> -->
       </div>
 
       <div class="p-col-6 p-md-3 p-fluid">
@@ -22,16 +22,15 @@
 
       <div class="p-col-12 p-md-9 p-fluid">
         <label>Descrição</label>
-        <app-message></app-message>
         <input type="text" name="descricao" ngModel #descricao="ngModel" required minlength="5" pInputText />
-        <app-message [control]="descricao" error="required" text="Informe uma descrição"></app-message>
-        <app-message [control]="descricao" error="minlength" text="Informe um mínimo de 5 caracteres"></app-message>
+        <!-- <app-message [control]="descricao" error="required" text="Informe uma descrição"></app-message> -->
+        <!-- <app-message [control]="descricao" error="minlength" text="Informe um mínimo de 5 caracteres"></app-message> -->
        </div>
 
       <div class="p-col-12 p-md-3 p-fluid">
         <label>Valor</label>
         <p-inputNumber [minFractionDigits]="2" [maxFractionDigits]="2" mode="decimal" locale="pt-BR" name="valor" ngModel #valor="ngModel"></p-inputNumber>
-        <app-message [control]="valor" error="required" text="Informe um valor"></app-message>
+        <!-- <app-message [control]="valor" error="required" text="Informe um valor"></app-message> -->
       </div>
 
       <div class="p-col-12 p-md-6 p-fluid">
