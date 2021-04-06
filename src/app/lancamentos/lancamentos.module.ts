@@ -17,6 +17,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DropdownModule } from 'primeng/dropdown';
     DropdownModule,
     InputNumberModule,
     InputMaskModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   exports: [
     LancamentoCadastroComponent,
