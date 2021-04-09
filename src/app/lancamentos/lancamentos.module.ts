@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
-import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 
 import { InputMaskModule } from 'primeng/inputmask';
@@ -22,8 +21,7 @@ import { SharedModule } from '../shared/shared.module';
 @NgModule({
   declarations: [
     LancamentoCadastroComponent,
-    LancamentosPesquisaComponent,
-    LancamentosGridComponent
+    LancamentosPesquisaComponent
   ],
   imports: [
     CommonModule,
