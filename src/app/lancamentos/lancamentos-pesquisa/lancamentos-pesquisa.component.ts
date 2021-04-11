@@ -26,6 +26,8 @@ export class LancamentosPesquisaComponent implements OnInit {
         this.totalRegistros = resultado.total;
         this.lancamentos = resultado.lancamentos;
       });
+
+      console.log(this.totalRegistros);
   }
 
   aoMudarPagina(event: LazyLoadEvent): void {

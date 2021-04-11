@@ -18,9 +18,7 @@ export class LancamentoService {
 
   url = 'http://localhost:8080/lancamentos';
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor( private http: HttpClient ) { }
 
   async pesquisar(lancamentoFiltro: LancamentoFiltro): Promise<any> {
 
