@@ -29,7 +29,8 @@
         [paginator]="true" [rows]="filtro.itensPorPagina"
         [lazy]="true" [totalRecords]="totalRegistros"
         [responsive]="true"
-        (onLazyLoad)="aoMudarPagina($event)">
+        (onLazyLoad)="aoMudarPagina($event)"
+        #tabela>
 
         <ng-template pTemplate="caption">
           Lançamentos
@@ -70,7 +71,7 @@
             </td>
             <td class="text-center last-child">
               <a class="p-mr-1" pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"></a>
-              <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+              <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top" (click)="excluir(lancamento)"></button>
             </td>
           </tr>
         </ng-template>

@@ -8,7 +8,7 @@ export class LancamentoFiltro {
   dataVencimentoDe: Date;
   dataVencimentoAte: Date;
   pagina = 0;
-  itensPorPagina = 2;
+  itensPorPagina = 4;
 }
 
 @Injectable({
@@ -40,6 +40,18 @@ export class LancamentoService {
 
         return resultado;
       });
+  }
+
+  async excluir(codigo: number): Promise<void> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Basic YWRtaW5AZW1haWwuY29tOmFkbWlu'
+      })
+    };
+
+    return this.http.delete(`${this.url}/${codigo}`, httpOptions)
+      .toPromise()
+      .then(() => null);
   }
 
   private validarParametro(lancamentoFiltro: LancamentoFiltro): HttpParams {
