@@ -10,9 +10,9 @@ import { CoreModule } from './core/core.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 
-import { ToastyModule } from 'ng2-toasty';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -25,12 +25,13 @@ import { ConfirmationService } from 'primeng/api';
     CoreModule,
     HttpClientModule,
     ConfirmDialogModule,
-    ToastyModule.forRoot()
+    ToastModule
   ],
   providers: [
     LancamentoService,
     PessoaService,
-    ConfirmationService
+    ConfirmationService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })
