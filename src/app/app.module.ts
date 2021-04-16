@@ -6,10 +6,13 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { PessoasModule } from './pessoas/pessoas.module';
+import { LoaderComponent } from './components/loader/loader.component';
+import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -17,7 +20,9 @@ import { PessoasModule } from './pessoas/pessoas.module';
     PessoasModule,
     CoreModule,
     HttpClientModule,
-
+    NgxLoadingModule.forRoot({
+      fullScreenBackdrop: true
+    })
   ],
   bootstrap: [AppComponent]
 })

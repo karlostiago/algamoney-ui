@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AbstractService } from '../core/AbstractService';
 
 export class PessoaFiltro {
   nome: string;
@@ -10,22 +11,20 @@ export class PessoaFiltro {
 @Injectable({
   providedIn: 'root'
 })
-export class PessoaService {
+export class PessoaService extends AbstractService {
 
   url = 'http://localhost:8080/pessoas';
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient ) { super(); }
+
+  async excluir(codigo: number): Promise<void> {
+    return this.http.delete(`${this.url}/${codigo}`, this.httpOptions())
+      .toPromise()
+      .then(() => null);
+  }
 
   async pesquisar(pessoaFiltro: PessoaFiltro): Promise<any> {
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Basic YWRtaW5AZW1haWwuY29tOmFkbWlu'
-      }),
-      params: this.validarParametro(pessoaFiltro)
-    };
-
-    return this.http.get(this.url, httpOptions)
+    return this.http.get(this.url, this.httpOptions(this.validarParametro(pessoaFiltro)))
       .toPromise()
       .then(response => {
         const pessoas = (response as any).content;

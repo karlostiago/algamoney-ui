@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import * as moment from 'moment';
+import { AbstractService } from '../core/AbstractService';
 
 export class LancamentoFiltro {
   descricao: string;
@@ -14,22 +15,14 @@ export class LancamentoFiltro {
 @Injectable({
   providedIn: 'root'
 })
-export class LancamentoService {
+export class LancamentoService extends AbstractService {
 
   url = 'http://localhost:8080/lancamentos';
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient ) { super(); }
 
   async pesquisar(lancamentoFiltro: LancamentoFiltro): Promise<any> {
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Basic YWRtaW5AZW1haWwuY29tOmFkbWlu'
-      }),
-      params: this.validarParametro(lancamentoFiltro)
-    };
-
-    return this.http.get(`${this.url}?resumo`, httpOptions)
+    return this.http.get(`${this.url}?resumo`, this.httpOptions(this.validarParametro(lancamentoFiltro)))
       .toPromise()
       .then(response => {
         const lancamentos = (response as any).content;
@@ -43,13 +36,7 @@ export class LancamentoService {
   }
 
   async excluir(codigo: number): Promise<void> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Basic YWRtaW5AZW1haWwuY29tOmFkbWlu'
-      })
-    };
-
-    return this.http.delete(`${this.url}/${codigo}`, httpOptions)
+    return this.http.delete(`${this.url}/${codigo}`, this.httpOptions())
       .toPromise()
       .then(() => null);
   }
