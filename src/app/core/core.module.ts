@@ -7,14 +7,15 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
+import { LancamentosModule } from './../lancamentos/lancamentos.module';
+import { PessoasModule } from './../pessoas/pessoas.module';
+
 import { LoaderService } from './../components/loader/loader.service';
 import { LoaderModule } from './../components/loader/loader.module';
 import { PessoaService } from './../pessoas/pessoa.service';
 import { LancamentoService } from './../lancamentos/lancamento.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { NavbarComponent } from './navbar/navbar.component';
-import { LancamentosModule } from '../lancamentos/lancamentos.module';
-import { PessoasModule } from '../pessoas/pessoas.module';
 
 registerLocaleData(localePt, 'pt');
 
@@ -26,6 +27,7 @@ registerLocaleData(localePt, 'pt');
     CommonModule,
     ConfirmDialogModule,
     ToastModule,
+    PessoasModule
   ],
   exports: [
     NavbarComponent,
