@@ -1,4 +1,3 @@
-import { NgxLoadingComponent } from 'ngx-loading';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
@@ -9,12 +8,13 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 import { LoaderService } from './../components/loader/loader.service';
+import { LoaderModule } from './../components/loader/loader.module';
 import { PessoaService } from './../pessoas/pessoa.service';
 import { LancamentoService } from './../lancamentos/lancamento.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { NavbarComponent } from './navbar/navbar.component';
-
-import { LoaderModule } from '../components/loader/loader.module';
+import { LancamentosModule } from '../lancamentos/lancamentos.module';
+import { PessoasModule } from '../pessoas/pessoas.module';
 
 registerLocaleData(localePt, 'pt');
 
@@ -26,12 +26,14 @@ registerLocaleData(localePt, 'pt');
     CommonModule,
     ConfirmDialogModule,
     ToastModule,
-    LoaderModule
   ],
   exports: [
     NavbarComponent,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,
+    LancamentosModule,
+    PessoasModule,
+    LoaderModule
   ],
   providers: [
     ErrorHandlerService,

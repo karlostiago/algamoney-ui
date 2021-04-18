@@ -15,7 +15,7 @@ export class PessoasPesquisaComponent implements OnInit {
   totalRegistros = 0;
   pessoas = [];
   filtro = new PessoaFiltro();
-  @ViewChild('tabela') tabela;
+  @ViewChild('tabela') tabela: any;
 
   constructor(
       private pessoaService: PessoaService,
