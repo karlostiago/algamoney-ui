@@ -17,6 +17,12 @@ export class PessoaService extends AbstractService {
 
   constructor( private http: HttpClient ) { super(); }
 
+  async status(pessoa: any): Promise<void> {
+    return this.http.put(`${this.url}/${pessoa.codigo}/ativo`, !pessoa.ativo, this.httpOptions())
+      .toPromise()
+      .then(() => null);
+  }
+
   async excluir(codigo: number): Promise<void> {
     return this.http.delete(`${this.url}/${codigo}`, this.httpOptions())
       .toPromise()

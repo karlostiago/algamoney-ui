@@ -54,8 +54,10 @@
               {{pessoa.endereco?.estado}}
             </td>
             <td class="text-center">
-              <span class="p-column-title">Status</span>
-              {{pessoa.ativo ? 'Sim' : 'Não'}}
+              <a href="#" class="label {{pessoa.ativo ? 'label-success' : 'label-danger'}}" (click)="atualizaStatus(pessoa)">
+                <span class="p-column-title">Status</span>
+                {{pessoa.ativo ? 'Sim' : 'Não'}}
+              </a>
             </td>
             <td class="text-center last-child">
               <a class="p-mr-1" pButton icon="pi pi-pencil" pToolip="Editar" tooltipPosition="top"></a>

@@ -51,6 +51,19 @@ export class PessoasPesquisaComponent implements OnInit {
     });
   }
 
+  atualizaStatus(pessoa: any): void {
+    this.pessoaService.status(pessoa)
+      .then(() => {
+        pessoa.ativo = !pessoa.ativo;
+
+        this.messageService.add({
+          severity: 'success',
+          summary: `Pessoa ${pessoa.ativo ? 'ativada' : 'desativada'} com sucesso.`
+        });
+      })
+      .catch(erro => this.errorHandlerService.handle(erro));
+  }
+
   private excluir(pessoa: any): void {
     this.pessoaService.excluir(pessoa.codigo)
     .then(() => {

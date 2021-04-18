@@ -1,0 +1,29 @@
+.label {
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.label,
+a.label {
+  text-decoration: none;
+}
+
+.label.label-success {
+  background: #39a139;
+  color: #fff;
+}
+
+.label.label-success:hover {
+  background: #379137;
+  transition: 1s;
+}
+
+.label.label-danger {
+  background: #eb2c4f;
+  color: #fff;
+}
+
+.label.label-danger:hover {
+  background: #d32444;
+  transition: 1s;
+}

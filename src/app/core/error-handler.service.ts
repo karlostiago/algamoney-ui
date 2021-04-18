@@ -11,8 +11,11 @@ export class ErrorHandlerService {
   handle(errorResponse: any): void {
     let msg: string;
 
-    if (typeof errorResponse === 'string') {
-      msg = errorResponse;
+    if (errorResponse.status === 415) {
+      msg = 'Media type não suportado';
+    }
+    else if (errorResponse.status === 400) {
+      msg = errorResponse.error[0].mensagemUsuario;
     }
     else {
       msg = 'Erro ao processar serviço remoto. Tente novamente.';
