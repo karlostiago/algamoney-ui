@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import * as moment from 'moment';
 import { AbstractService } from '../core/AbstractService';
+import { Lancamento } from '../core/models/Lancamento.model';
 
 export class LancamentoFiltro {
   descricao: string;
@@ -20,6 +21,12 @@ export class LancamentoService extends AbstractService {
   url = 'http://localhost:8080/lancamentos';
 
   constructor( private http: HttpClient ) { super(); }
+
+  async adicionar(lancamento: Lancamento): Promise<Lancamento> {
+    return this.http.post(this.url, JSON.stringify(lancamento), this.httpOptions())
+      .toPromise()
+      .then(response => (response as any));
+  }
 
   async pesquisar(lancamentoFiltro: LancamentoFiltro): Promise<any> {
     return this.http.get(`${this.url}?resumo`, this.httpOptions(this.validarParametro(lancamentoFiltro)))

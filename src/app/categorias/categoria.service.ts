@@ -14,14 +14,6 @@ export class CategoriaService extends AbstractService {
   async todas(): Promise<any> {
     return this.http.get(this.url, this.httpOptions())
       .toPromise()
-      .then(response => {
-        const categorias = [{ label: 'Selecione', value: 0 }];
-
-        for (const categoria of (response as any)) {
-          categorias.push({label: categoria.nome, value: categoria.codigo});
-        }
-
-        return categorias;
-      });
+      .then(response => response);
   }
 }
