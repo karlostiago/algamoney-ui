@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AbstractService } from '../core/AbstractService';
+import { Pessoa } from '../core/models/Pessoa.model';
 
 export class PessoaFiltro {
   nome: string;
@@ -16,6 +17,12 @@ export class PessoaService extends AbstractService {
   url = 'http://localhost:8080/pessoas';
 
   constructor( private http: HttpClient ) { super(); }
+
+  async adicionar(pessoa: Pessoa): Promise<Pessoa> {
+    return this.http.post(this.url, JSON.stringify(pessoa), this.httpOptions())
+      .toPromise()
+      .then(response => (response as any));
+  }
 
   async status(pessoa: any): Promise<void> {
     return this.http.put(`${this.url}/${pessoa.codigo}/ativo`, !pessoa.ativo, this.httpOptions())
