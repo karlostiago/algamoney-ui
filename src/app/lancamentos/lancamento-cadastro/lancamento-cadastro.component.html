@@ -2,7 +2,7 @@
   <form autocomplete="off" #lancamentoForm="ngForm" (ngSubmit)="salvar(lancamentoForm)">
     <div class="p-grid">
       <div class="p-col-12">
-        <h1>Novo Lançamento</h1>
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Lançamento</h1>
       </div>
 
       <div class="p-col-12">
@@ -35,12 +35,12 @@
 
       <div class="p-col-12 p-md-6 p-fluid">
         <label>Categoria</label>
-        <p-dropdown [options]="categorias" name="categoria" [(ngModel)]="lancamento.categoria"></p-dropdown>
+        <p-dropdown [options]="categorias" name="categoria" [(ngModel)]="lancamento.categoria.codigo"></p-dropdown>
       </div>
 
       <div class="p-col-12 p-md-6 p-fluid">
         <label>Pessoa</label>
-        <p-dropdown [options]="pessoas" [filter]="true" name="pessoa" [(ngModel)]="lancamento.pessoa"></p-dropdown>
+        <p-dropdown [options]="pessoas" [filter]="true" name="pessoa" [(ngModel)]="lancamento.pessoa.codigo"></p-dropdown>
       </div>
 
       <div class="p-col-12 p-fluid">
@@ -51,7 +51,7 @@
       <div class="p-col-12">
         <button type="submit" label="Salvar" class="p-mr-1" pButton [disabled]="!lancamentoForm.valid"></button>
         <button type="button" label="Novo" pButton class="p-button-info p-mr-1"></button>
-        <button type="button" pButton class="p-button-text p-button-plain" label="Voltar"></button>
+        <a routerLink="/lancamentos" pButton class="p-button-text p-button-plain" label="Voltar"></a>
       </div>
     </div>
   </form>

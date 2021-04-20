@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Lancamento } from 'src/app/core/models/Lancamento.model';
 import { MessageService } from 'primeng/api';
+import { ActivatedRoute } from '@angular/router';
+
+const CODIGO = 'codigo';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -27,12 +30,30 @@ export class LancamentoCadastroComponent implements OnInit {
     private pessoaService: PessoaService,
     private lancamentoService: LancamentoService,
     private messageService: MessageService,
-    private errorHandlerService: ErrorHandlerService
+    private errorHandlerService: ErrorHandlerService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    const codigo = this.route.snapshot.params[CODIGO];
     this.carregarCategorias();
     this.carregarPessoas();
+
+    if (codigo) {
+      this.carregarLancamento(codigo);
+    }
+  }
+
+  get editando(): boolean {
+    return Boolean(this.lancamento.codigo);
+  }
+
+  async carregarLancamento(codigo: number): Promise<void> {
+    this.lancamentoService.buscarPorCodigo(codigo)
+      .then(lancamento => {
+          this.lancamento = lancamento;
+      })
+      .catch(erro => this.errorHandlerService.handle(erro));
   }
 
   async salvar(form: FormControl): Promise<void> {
@@ -68,6 +89,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
     return this.pessoaService.pesquisar(this.pessoaFilter)
       .then(response => {
+        this.pessoas = [];
         const pessoas = [{ label: 'Selecione', value: 0}];
 
         for (const pessoa of (response as any).pessoas) {
@@ -80,6 +102,6 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   private comboConverter(o: any): any {
-    return { label: o.nome, value:  o.codigo }
+    return { label: o.nome, value:  o.codigo };
   }
 }

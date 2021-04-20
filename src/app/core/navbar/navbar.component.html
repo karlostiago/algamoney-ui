@@ -9,8 +9,8 @@
 
   <ul class="navbar-menu" [hidden]="!exibirMenu">
     <li class="navbar-usuario"> Administrador </li>
-    <li class="navbar-menu-item"><a href="#"> Lançamentos </a></li>
-    <li class="navbar-menu-item"><a href="#"> Pessoas </a></li>
+    <li class="navbar-menu-item" routerLinkActive="ativo"><a routerLink="/lancamentos"> Lançamentos </a></li>
+    <li class="navbar-menu-item" routerLinkActive="ativo"><a routerLink="/pessoas"> Pessoas </a></li>
     <li class="navbar-menu-item"><a href="#"> Logout </a></li>
   </ul>
 </nav>

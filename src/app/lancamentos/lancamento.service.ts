@@ -48,6 +48,21 @@ export class LancamentoService extends AbstractService {
       .then(() => null);
   }
 
+  async buscarPorCodigo(codigo: number): Promise<Lancamento> {
+    return this.http.get(`${this.url}/${codigo}`, this.httpOptions())
+      .toPromise()
+      .then(response => {
+          const result = (response as any) as Lancamento;
+          const lancamento = result;
+
+          lancamento.dataPagamento = result.dataPagamento ? new Date(result.dataPagamento) : null;
+          lancamento.dataVencimento = result.dataVencimento ? new Date(result.dataVencimento) : null;
+
+          return lancamento;
+        }
+      );
+  }
+
   private validarParametro(lancamentoFiltro: LancamentoFiltro): HttpParams {
     let params = new HttpParams();
 

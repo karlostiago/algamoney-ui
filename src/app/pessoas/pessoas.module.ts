@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -37,6 +38,7 @@ import { SharedModule } from '../shared/shared.module';
     InputNumberModule,
     InputMaskModule,
     FormsModule,
+    RouterModule,
     SharedModule
   ],
   exports: [

@@ -10,6 +10,6 @@ export class Lancamento {
   dataVencimento: Date;
   dataPagamento: Date;
   observacao: string;
-  pessoa: number;
-  categoria: number;
+  pessoa = new Pessoa();
+  categoria = new Categoria();
 }
