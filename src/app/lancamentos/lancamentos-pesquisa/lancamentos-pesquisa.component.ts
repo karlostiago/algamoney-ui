@@ -3,6 +3,7 @@ import { LazyLoadEvent, ConfirmationService, MessageService } from 'primeng/api'
 
 import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -22,10 +23,12 @@ export class LancamentosPesquisaComponent implements OnInit {
     private lancamentoService: LancamentoService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private errorHandlerService: ErrorHandlerService
+    private errorHandlerService: ErrorHandlerService,
+    private title: Title
   ) {}
 
   ngOnInit(): void {
+    this.title.setTitle('AlgaMoney - Pesquisa de lançamentos');
   }
 
   pesquisar(pagina = 0): any {

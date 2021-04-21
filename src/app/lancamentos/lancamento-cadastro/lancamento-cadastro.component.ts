@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Lancamento } from 'src/app/core/models/Lancamento.model';
 import { MessageService } from 'primeng/api';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 const CODIGO = 'codigo';
 
@@ -31,13 +32,17 @@ export class LancamentoCadastroComponent implements OnInit {
     private lancamentoService: LancamentoService,
     private messageService: MessageService,
     private errorHandlerService: ErrorHandlerService,
-    private route: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit(): void {
-    const codigo = this.route.snapshot.params[CODIGO];
+    const codigo = this.activatedRoute.snapshot.params[CODIGO];
     this.carregarCategorias();
     this.carregarPessoas();
+
+    this.title.setTitle('AlgaMoney - Novo lançamento');
 
     if (codigo) {
       this.carregarLancamento(codigo);
@@ -52,20 +57,42 @@ export class LancamentoCadastroComponent implements OnInit {
     this.lancamentoService.buscarPorCodigo(codigo)
       .then(lancamento => {
           this.lancamento = lancamento;
+          this.atualizarTitulo();
       })
       .catch(erro => this.errorHandlerService.handle(erro));
   }
 
   async salvar(form: FormControl): Promise<void> {
-    this.lancamentoService.adicionar(this.lancamento)
+    if (this.editando) {
+      this.atualizarLancamento();
+    } else {
+      this.adicionarLancamento(form);
+    }
+  }
+
+  async atualizarLancamento(): Promise<void> {
+    this.lancamentoService.atualizar(this.lancamento)
       .then(() => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Lançamento atualizado com sucesso.'
+        });
+        this.atualizarTitulo();
+      })
+      .catch(erro => this.errorHandlerService.handle(erro));
+  }
+
+  async adicionarLancamento(form: FormControl): Promise<void> {
+    this.lancamentoService.adicionar(this.lancamento)
+      .then(lancamento => {
         this.messageService.add({
           severity: 'success',
           summary: 'Lançamento adicionado com sucesso.'
         });
 
-        form.reset();
-        this.lancamento = new Lancamento();
+        // form.reset();
+        // this.lancamento = new Lancamento();
+        this.router.navigate(['/lancamentos', lancamento.codigo]);
       })
       .catch(erro => this.errorHandlerService.handle(erro));
   }
@@ -101,7 +128,22 @@ export class LancamentoCadastroComponent implements OnInit {
       .catch(erro => this.errorHandlerService.handle(erro));
   }
 
+  async novo(form: FormControl): Promise<void> {
+    form.reset();
+
+    setTimeout(() => {
+      this.lancamento = new Lancamento();
+    }, 1);
+
+    this.router.navigate(['/lancamentos/novo']);
+  }
+
   private comboConverter(o: any): any {
     return { label: o.nome, value:  o.codigo };
+  }
+
+  private atualizarTitulo(): void {
+    console.log(this.lancamento);
+    this.title.setTitle(`AlgaMoney - Edição de lançamento.: ${this.lancamento.descricao}`);
   }
 }

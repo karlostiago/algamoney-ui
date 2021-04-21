@@ -23,7 +23,7 @@ export class LancamentoService extends AbstractService {
   constructor( private http: HttpClient ) { super(); }
 
   async adicionar(lancamento: Lancamento): Promise<Lancamento> {
-    return this.http.post(this.url, JSON.stringify(lancamento), this.httpOptions())
+    return this.http.post(this.url, this.getLancamentoDto(lancamento), this.httpOptions())
       .toPromise()
       .then(response => (response as any));
   }
@@ -55,12 +55,33 @@ export class LancamentoService extends AbstractService {
           const result = (response as any) as Lancamento;
           const lancamento = result;
 
-          lancamento.dataPagamento = result.dataPagamento ? new Date(result.dataPagamento) : null;
-          lancamento.dataVencimento = result.dataVencimento ? new Date(result.dataVencimento) : null;
+          lancamento.dataPagamento = result.dataPagamento ? moment(result.dataPagamento, 'YYYY-MM-DD').toDate() : null;
+          lancamento.dataVencimento = result.dataVencimento ? moment(result.dataVencimento, 'YYYY-MM-DD').toDate() : null;
 
           return lancamento;
         }
       );
+  }
+
+  async atualizar(lancamento: Lancamento): Promise<Lancamento> {
+    return this.http.put(`${this.url}/${lancamento.codigo}`, this.getLancamentoDto(lancamento), this.httpOptions())
+      .toPromise()
+      .then(response => {
+        return (response as any) as Lancamento;
+      });
+  }
+
+  private getLancamentoDto(lancamento: Lancamento): any {
+    return {
+      descricao: lancamento.descricao,
+      dataVencimento: lancamento.dataVencimento,
+      dataPagamento: lancamento.dataPagamento,
+      valor: lancamento.valor,
+      observacao: lancamento.observacao,
+      tipo: lancamento.tipo,
+      categoria: lancamento.categoria.codigo,
+      pessoa: lancamento.pessoa.codigo
+    };
   }
 
   private validarParametro(lancamentoFiltro: LancamentoFiltro): HttpParams {
