@@ -1,3 +1,4 @@
+import { Endereco } from './../core/models/Endereco.model';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AbstractService } from '../core/AbstractService';
@@ -17,6 +18,20 @@ export class PessoaService extends AbstractService {
   url = 'http://localhost:8080/pessoas';
 
   constructor( private http: HttpClient ) { super(); }
+
+  async porCodigo(codigo: number) {
+    return this.http.get(`${this.url}/${codigo}`, this.httpOptions())
+      .toPromise()
+      .then(response => {
+        const pessoa = (response as any);
+
+        if (pessoa.endereco === null) {
+          pessoa.endereco = new Endereco();
+        }
+
+        return pessoa;
+      });
+  }
 
   async adicionar(pessoa: Pessoa): Promise<Pessoa> {
     return this.http.post(this.url, JSON.stringify(pessoa), this.httpOptions())
