@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { PessoaService } from './../pessoa.service';
 import { Pessoa } from 'src/app/core/models/Pessoa.model';
 import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 const CODIGO = 'codigo';
 
@@ -21,21 +22,25 @@ export class PessoaCadastroComponent implements OnInit {
     private route: ActivatedRoute,
     private pessoaService: PessoaService,
     private messageService: MessageService,
-    private errorHandlerService: ErrorHandlerService
+    private errorHandlerService: ErrorHandlerService,
+    private title: Title
   ) { }
 
   ngOnInit(): void {
     const codigo = this.route.snapshot.params[CODIGO];
+
+    this.title.setTitle('AlgaMoney - Cadastro de pessoas');
 
     if (codigo) {
       this.carregarPessoa(codigo);
     }
   }
 
-  async carregarPessoa(codigo: number) {
+  async carregarPessoa(codigo: number): Promise<void> {
     this.pessoaService.porCodigo(codigo)
       .then(pessoa => {
         this.pessoa = pessoa;
+        this.atualizaTitle();
       })
       .catch(erro => this.errorHandlerService.handle(erro));
   }
@@ -55,4 +60,7 @@ export class PessoaCadastroComponent implements OnInit {
       .catch(erro => this.errorHandlerService.handle(erro));
   }
 
+  private atualizaTitle(): void {
+    this.title.setTitle(`AlgaMoney - Ediçao de pessoas.: ${this.pessoa.nome}`);
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { LazyLoadEvent, ConfirmationService, MessageService } from 'primeng/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
@@ -21,10 +22,12 @@ export class PessoasPesquisaComponent implements OnInit {
       private pessoaService: PessoaService,
       private confirmationService: ConfirmationService,
       private messageService: MessageService,
-      private errorHandlerService: ErrorHandlerService
+      private errorHandlerService: ErrorHandlerService,
+      private title: Title
   ) { }
 
   ngOnInit(): void {
+    this.title.setTitle('AlgaMoney - Pesquisa de pessoas');
   }
 
   pesquisar(pagina = 0): any {
