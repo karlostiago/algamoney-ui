@@ -90,8 +90,6 @@ export class LancamentoCadastroComponent implements OnInit {
           summary: 'Lançamento adicionado com sucesso.'
         });
 
-        // form.reset();
-        // this.lancamento = new Lancamento();
         this.router.navigate(['/lancamentos', lancamento.codigo]);
       })
       .catch(erro => this.errorHandlerService.handle(erro));
@@ -143,7 +141,6 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   private atualizarTitulo(): void {
-    console.log(this.lancamento);
     this.title.setTitle(`AlgaMoney - Edição de lançamento.: ${this.lancamento.descricao}`);
   }
 }

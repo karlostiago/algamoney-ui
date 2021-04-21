@@ -19,7 +19,15 @@ export class PessoaService extends AbstractService {
 
   constructor( private http: HttpClient ) { super(); }
 
-  async porCodigo(codigo: number) {
+  async atualizar(pessoa: Pessoa): Promise<Pessoa> {
+    return this.http.put(`${this.url}/${pessoa.codigo}`, this.getPessoaDto(pessoa), this.httpOptions())
+      .toPromise()
+      .then(response => {
+        return (response as any) as Pessoa;
+      });
+  }
+
+  async porCodigo(codigo: number): Promise<Pessoa> {
     return this.http.get(`${this.url}/${codigo}`, this.httpOptions())
       .toPromise()
       .then(response => {
@@ -63,6 +71,14 @@ export class PessoaService extends AbstractService {
 
         return  resultado;
       });
+  }
+
+  private getPessoaDto(pessoa: Pessoa): any {
+    return {
+      nome: pessoa.nome,
+      endereco: pessoa.endereco,
+      ativo: pessoa.ativo
+    }
   }
 
   private validarParametro(pessoaFiltro: PessoaFiltro): HttpParams {

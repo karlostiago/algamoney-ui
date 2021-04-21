@@ -1,9 +1,8 @@
-import { RouterModule } from '@angular/router';
+import { PessoasRountingModule } from './pessoas-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Title } from '@angular/platform-browser';
 
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -39,8 +38,8 @@ import { SharedModule } from '../shared/shared.module';
     InputNumberModule,
     InputMaskModule,
     FormsModule,
-    RouterModule,
-    SharedModule
+    SharedModule,
+    PessoasRountingModule
   ],
   exports: []
 })
