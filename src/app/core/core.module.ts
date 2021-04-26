@@ -3,6 +3,7 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
@@ -18,7 +19,7 @@ import { LancamentoService } from './../lancamentos/lancamento.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
-import { Title } from '@angular/platform-browser';
+import { SegurancaModule } from '../seguranca/seguranca.module';
 
 registerLocaleData(localePt, 'pt');
 
@@ -40,7 +41,8 @@ registerLocaleData(localePt, 'pt');
     ToastModule,
     LancamentosModule,
     PessoasModule,
-    LoaderModule
+    LoaderModule,
+    SegurancaModule
   ],
   providers: [
     ErrorHandlerService,
