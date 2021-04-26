@@ -1,1 +1,23 @@
-<p>login-form works!</p>
+<div class="container">
+  <div class="p-grid">
+    <form action="" autocomplete="off" #loginForm="ngForm" style="width: 50%; margin: 0 auto;">
+      <div class="p-col-1">
+        <h1>Login</h1>
+      </div>
+
+      <div class="p-col-12 p-fluid">
+        <label>E-mail.:</label>
+        <input type="text" pInputText placeholder="E-mail" name="usuario" ngModel required #usuario />
+      </div>
+
+      <div class="p-col-12 p-fluid">
+        <label for="Senha">Senha.:</label>
+        <input type="password" pInputText placeholder="Senha" required #senha name="senha" ngModel />
+      </div>
+
+      <div class="p-col-12 p-fluid">
+        <button type="submit" pButton label="Login" [disabled]="!loginForm.valid" (click)="login(usuario.value, senha.value)"></button>
+      </div>
+    </form>
+  </div>
+</div>
