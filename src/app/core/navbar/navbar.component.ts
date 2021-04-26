@@ -16,7 +16,6 @@ export class NavbarComponent implements OnInit {
   }
 
   exibirToggle(): boolean {
-    console.log('exibindo navbar')
     return this.router.url !== '/login';
   }
 }

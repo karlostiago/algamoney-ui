@@ -12,6 +12,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { LancamentosModule } from './../lancamentos/lancamentos.module';
 import { PessoasModule } from './../pessoas/pessoas.module';
 
+import { AuthService } from './../seguranca/auth.service';
 import { LoaderService } from './../components/loader/loader.service';
 import { LoaderModule } from './../components/loader/loader.module';
 import { PessoaService } from './../pessoas/pessoa.service';
@@ -51,6 +52,7 @@ registerLocaleData(localePt, 'pt');
     ConfirmationService,
     MessageService,
     LoaderService,
+    AuthService,
     Title,
     { provide: LOCALE_ID, useValue: 'pt' }
   ]

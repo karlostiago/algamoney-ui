@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from './../auth.service';
+
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -7,12 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginFormComponent implements OnInit {
 
-  constructor() { }
+  constructor( private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
   async login(usuario: string, senha: string): Promise<void> {
-    console.log(usuario, senha);
+    this.authService.login(usuario, senha);
   }
 }
