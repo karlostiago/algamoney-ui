@@ -11,7 +11,10 @@ export class ErrorHandlerService {
   handle(errorResponse: any): void {
     let msg: string;
 
-    if (errorResponse.status === 415) {
+    if (typeof errorResponse === 'string') {
+      msg = errorResponse;
+    }
+    else if (errorResponse.status === 415) {
       msg = 'Media type não suportado';
     }
     else if (errorResponse.status === 400) {

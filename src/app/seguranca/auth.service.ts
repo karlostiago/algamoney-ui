@@ -29,14 +29,20 @@ export class AuthService {
         this.armazenarToken((response as any).access_token);
       })
       .catch(response => {
-        console.log(response);
+        const httpResponse = (response as any);
+
+        if (httpResponse.status === 400 && httpResponse.error.error === 'invalid_grant') {
+          return Promise.reject('Usuário ou senha inválida!');
+        }
+
+        return Promise.reject(httpResponse);
       });
   }
 
-  private armazenarToken(token: string) {
+  private armazenarToken(token: string): void {
     const jwtHelper = new JwtHelperService();
     this.jwtPayload = jwtHelper.decodeToken(token);
-    
+
     localStorage.setItem('token', token);
   }
 

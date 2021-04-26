@@ -16,7 +16,7 @@
       </div>
 
       <div class="p-col-12 p-fluid">
-        <button type="submit" pButton label="Login" [disabled]="!loginForm.valid" (click)="login(usuario.value, senha.value)"></button>
+        <button type="submit" pButton label="Login" [disabled]="!loginForm.valid" (click)="login(usuario.value, senha.value); senha.value = '';"></button>
       </div>
     </form>
   </div>
