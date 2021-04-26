@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,8 +10,13 @@ export class NavbarComponent implements OnInit {
 
   exibirMenu: boolean;
 
-  constructor() { }
+  constructor( private router: Router ) { }
 
   ngOnInit(): void {
+  }
+
+  exibirToggle(): boolean {
+    console.log('exibindo navbar')
+    return this.router.url !== '/login';
   }
 }
