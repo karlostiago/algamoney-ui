@@ -17,13 +17,10 @@ export class AuthService {
   }
 
   async login(usuario: string, senha: string): Promise<void> {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
-    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
-    return this.http.post(this.url, body, { headers })
+    return this.http.post(this.url, body, { headers: this.getHttpHeader(), withCredentials: true })
       .toPromise()
       .then(response => {
         this.armazenarToken((response as any).access_token);
@@ -39,8 +36,31 @@ export class AuthService {
       });
   }
 
+  async obterNovoAccessToken(): Promise<void> {
+    const body = 'grant_type=refresh_token';
+
+    return this.http.post(this.url, body, { headers: this.getHttpHeader(), withCredentials: true })
+      .toPromise()
+      .then(response => {
+        const httpResponse = (response as any);
+        this.armazenarToken(httpResponse.access_token);
+        return Promise.resolve(null);
+      })
+      .catch(response => {
+        console.error('Erro ao renovar token.', response);
+        return Promise.resolve(null);
+      });
+  }
+
   temPermissao(permissao: string): boolean {
     return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
+  }
+
+  private getHttpHeader(): HttpHeaders {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
+    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    return headers;
   }
 
   private armazenarToken(token: string): void {

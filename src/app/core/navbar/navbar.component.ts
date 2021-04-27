@@ -30,4 +30,8 @@ export class NavbarComponent implements OnInit {
   temPermissao(permissao: string): boolean {
     return this.authService.temPermissao(permissao);
   }
+
+  criarNovoAccessToken(): void {
+    this.authService.obterNovoAccessToken();
+  }
 }
