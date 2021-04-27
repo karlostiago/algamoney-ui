@@ -1,3 +1,4 @@
+import { AuthService } from './../../seguranca/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -10,12 +11,19 @@ export class NavbarComponent implements OnInit {
 
   exibirMenu: boolean;
 
-  constructor( private router: Router ) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
   }
 
   exibirToggle(): boolean {
     return this.router.url !== '/login';
+  }
+
+  usuarioLogado(): string {
+    return this.authService.jwtPayload?.nome;
   }
 }

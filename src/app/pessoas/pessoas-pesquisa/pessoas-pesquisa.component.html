@@ -54,7 +54,7 @@
               {{pessoa.endereco?.estado}}
             </td>
             <td class="text-center">
-              <a href="#" class="label {{pessoa.ativo ? 'label-success' : 'label-danger'}}" (click)="atualizaStatus(pessoa)">
+              <a  class="label {{pessoa.ativo ? 'label-success' : 'label-danger'}}" (click)="atualizaStatus(pessoa)">
                 <span class="p-column-title">Status</span>
                 {{pessoa.ativo ? 'Sim' : 'Não'}}
               </a>

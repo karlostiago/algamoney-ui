@@ -16,6 +16,7 @@ a.label {
 .label.label-success:hover {
   background: #379137;
   transition: 1s;
+  cursor: pointer;
 }
 
 .label.label-danger {
@@ -26,4 +27,5 @@ a.label {
 .label.label-danger:hover {
   background: #d32444;
   transition: 1s;
+  cursor: pointer;
 }
