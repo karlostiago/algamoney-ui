@@ -1,3 +1,4 @@
+import { AuthService } from './../../seguranca/auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LazyLoadEvent, ConfirmationService, MessageService } from 'primeng/api';
 
@@ -24,7 +25,8 @@ export class LancamentosPesquisaComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private errorHandlerService: ErrorHandlerService,
-    private title: Title
+    private title: Title,
+    public authService: AuthService
   ) {}
 
   ngOnInit(): void {

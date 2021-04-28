@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
 
+enum StatusCode {
+  _403 = 'Você não tem permissão para executar esta ação',
+  _415 = 'Media type não suportado',
+  _401 = 'Não autorizado'
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,8 +20,8 @@ export class ErrorHandlerService {
     if (typeof errorResponse === 'string') {
       msg = errorResponse;
     }
-    else if (errorResponse.status === 415) {
-      msg = 'Media type não suportado';
+    else if (msg) {
+      msg = this.message(errorResponse.status);
     }
     else if (errorResponse.status === 400) {
       msg = errorResponse.error[0].mensagemUsuario;
@@ -28,5 +34,9 @@ export class ErrorHandlerService {
       severity: 'error',
       summary: msg
     });
+  }
+
+  private message(status: number): string {
+    return StatusCode[`_${status}`];
   }
 }

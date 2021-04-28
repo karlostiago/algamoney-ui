@@ -61,7 +61,10 @@
             </td>
             <td class="text-center last-child">
               <a class="p-mr-1" pButton icon="pi pi-pencil" pToolip="Editar" tooltipPosition="top" [routerLink]="['/pessoas', pessoa.codigo]"></a>
-              <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top" (click)="confirmarExclusao(pessoa)"></button>
+              <button pButton icon="pi pi-trash"
+                pTooltip="Excluir"
+                tooltipPosition="top" (click)="confirmarExclusao(pessoa)"
+                [disabled]="!authService.temPermissao('ROLE_REMOVER_PESSOA')"></button>
             </td>
           </tr>
         </ng-template>
@@ -69,7 +72,7 @@
     </div>
 
     <div class="p-col-12">
-      <a pButton label="Nova Pessoa" routerLink="/pessoas/nova"></a>
+      <button pButton label="Nova Pessoa" routerLink="/pessoas/nova" [disabled]="!authService.temPermissao('ROLE_CADASTRAR_PESSOA')"></button>
     </div>
   </div>
 </div>

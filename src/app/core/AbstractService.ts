@@ -1,4 +1,3 @@
-import { AuthService } from './../seguranca/auth.service';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 
 export abstract class AbstractService {
@@ -10,19 +9,6 @@ export abstract class AbstractService {
       headers: this.getHttpHeaders(),
       params
     };
-  }
-
-  isAccessTokenValido(authService: AuthService): boolean {
-    if (authService.isAccessTokenInvalido()) {
-      authService.obterNovoAccessToken()
-        .then(() => {
-          return true;
-        });
-
-      return true;
-    }
-
-    return false;
   }
 
   private getHttpHeaders(): HttpHeaders {
