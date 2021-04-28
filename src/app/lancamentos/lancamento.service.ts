@@ -1,3 +1,4 @@
+import { AuthService } from './../seguranca/auth.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
@@ -20,7 +21,7 @@ export class LancamentoService extends AbstractService {
 
   url = 'http://localhost:8080/lancamentos';
 
-  constructor( private http: HttpClient ) { super(); }
+  constructor( private http: HttpClient, private authService: AuthService ) { super(); }
 
   async adicionar(lancamento: Lancamento): Promise<Lancamento> {
     return this.http.post(this.url, this.getLancamentoDto(lancamento), this.httpOptions())

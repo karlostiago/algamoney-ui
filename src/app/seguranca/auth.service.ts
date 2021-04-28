@@ -56,6 +56,13 @@ export class AuthService {
     return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
   }
 
+  isAccessTokenInvalido(): boolean {
+    const token = localStorage.getItem('token');
+    const jwtHelper = new JwtHelperService();
+
+    return !token || jwtHelper.isTokenExpired(token);
+  }
+
   private getHttpHeader(): HttpHeaders {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
