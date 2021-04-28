@@ -11,7 +11,8 @@ export class AuthService {
   jwtPayload: any;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private jwtHelper: JwtHelperService
   ) {
     this.carregarToken();
   }
@@ -58,9 +59,7 @@ export class AuthService {
 
   isAccessTokenInvalido(): boolean {
     const token = localStorage.getItem('token');
-    const jwtHelper = new JwtHelperService();
-
-    return !token || jwtHelper.isTokenExpired(token);
+    return !token || this.jwtHelper.isTokenExpired(token);
   }
 
   private getHttpHeader(): HttpHeaders {
@@ -71,9 +70,7 @@ export class AuthService {
   }
 
   private armazenarToken(token: string): void {
-    const jwtHelper = new JwtHelperService();
-    this.jwtPayload = jwtHelper.decodeToken(token);
-
+    this.jwtPayload = this.jwtHelper.decodeToken(token);
     localStorage.setItem('token', token);
   }
 
