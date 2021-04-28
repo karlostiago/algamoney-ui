@@ -6,6 +6,8 @@ import { AuthService } from './auth.service';
 import { Observable, from } from 'rxjs';
 import {mergeMap} from 'rxjs/operators';
 
+export class NotAuthenticatedError {}
+
 @Injectable()
 export class MoneyHttpInterceptor implements HttpInterceptor {
 
@@ -17,11 +19,17 @@ export class MoneyHttpInterceptor implements HttpInterceptor {
       return from (this.authService.obterNovoAccessToken())
         .pipe (
           mergeMap (() => {
+
+            if (this.authService.isAccessTokenInvalido()) {
+              throw new NotAuthenticatedError();
+            }
+
             request = request.clone({
               setHeaders: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
               }
             });
+
             return next.handle(request);
           })
         );
