@@ -1,15 +1,16 @@
-import { MoneyHttpInterceptor } from './money-http-interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { InputTextModule } from 'primeng/inputtext';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 
+import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 
+import { MoneyHttpInterceptor } from './money-http-interceptor';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { SegurancaRountingModule } from './seguranca-routing.module';
-import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
+import { AuthGuard } from './auth.guard';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token');
@@ -38,6 +39,7 @@ export function tokenGetter(): string {
   ],
   providers: [
     JwtHelperService,
+    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: MoneyHttpInterceptor,
