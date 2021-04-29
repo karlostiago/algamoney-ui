@@ -5,6 +5,7 @@ import { LazyLoadEvent, ConfirmationService, MessageService } from 'primeng/api'
 import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { Title } from '@angular/platform-browser';
+import { Table } from 'primeng/table';
 
 
 @Component({
@@ -17,8 +18,9 @@ export class LancamentosPesquisaComponent implements OnInit {
   totalRegistros = 0;
   filtro = new LancamentoFiltro();
   lancamentos = [];
+  clicou = false;
 
-  @ViewChild('tabela') tabela;
+  @ViewChild('tabela') grid: Table;
 
   constructor(
     private lancamentoService: LancamentoService,
@@ -33,11 +35,14 @@ export class LancamentosPesquisaComponent implements OnInit {
     this.title.setTitle('AlgaMoney - Pesquisa de lançamentos');
   }
 
-  pesquisar(pagina = 0): any {
+  pesquisar(pagina = 0, recarregar = true): any {
     this.filtro.pagina = pagina;
 
     this.lancamentoService.pesquisar(this.filtro)
       .then(resultado => {
+        if (recarregar === true) {
+          this.grid.reset();
+        }
         this.totalRegistros = resultado.total;
         this.lancamentos = resultado.lancamentos;
       })
@@ -46,7 +51,7 @@ export class LancamentosPesquisaComponent implements OnInit {
 
   aoMudarPagina(event: LazyLoadEvent): void {
     const pagina = event.first / event.rows;
-    this.pesquisar(pagina);
+    this.pesquisar(pagina, false);
   }
 
   confirmarExclusao(lancamento: any): void {
@@ -61,8 +66,13 @@ export class LancamentosPesquisaComponent implements OnInit {
   private excluir(lancamento: any): void {
     this.lancamentoService.excluir(lancamento.codigo)
       .then(() => {
-        this.tabela.first = 0;
-        this.pesquisar();
+
+        if (this.grid.first === 0) {
+          this.pesquisar();
+        }
+        else {
+          this.grid.reset();
+        }
 
         this.messageService.add({
           severity: 'success',

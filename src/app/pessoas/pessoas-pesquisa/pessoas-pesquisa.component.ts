@@ -6,6 +6,7 @@ import { LazyLoadEvent, ConfirmationService, MessageService } from 'primeng/api'
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 
 import { PessoaService, PessoaFiltro } from './../pessoa.service';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-pessoas-pesquisa',
@@ -17,7 +18,7 @@ export class PessoasPesquisaComponent implements OnInit {
   totalRegistros = 0;
   pessoas = [];
   filtro = new PessoaFiltro();
-  @ViewChild('tabela') tabela: any;
+  @ViewChild('tabela') grid: Table;
 
   constructor(
       private pessoaService: PessoaService,
@@ -32,11 +33,14 @@ export class PessoasPesquisaComponent implements OnInit {
     this.title.setTitle('AlgaMoney - Pesquisa de pessoas');
   }
 
-  pesquisar(pagina = 0): any {
+  pesquisar(pagina = 0, recarregar = true): any {
     this.filtro.pagina = pagina;
 
     this.pessoaService.pesquisar(this.filtro)
       .then(resultado => {
+        if (recarregar === true) {
+          this.grid.reset();
+        }
         this.totalRegistros = resultado.total;
         this.pessoas = resultado.pessoas;
       });
@@ -44,7 +48,7 @@ export class PessoasPesquisaComponent implements OnInit {
 
   aoMudarPagina(event: LazyLoadEvent): void {
     const pagina = event.first / event.rows;
-    this.pesquisar(pagina);
+    this.pesquisar(pagina, false);
   }
 
   confirmarExclusao(pessoa: any): void {
@@ -72,8 +76,12 @@ export class PessoasPesquisaComponent implements OnInit {
   private excluir(pessoa: any): void {
     this.pessoaService.excluir(pessoa.codigo)
     .then(() => {
-      this.tabela.first = 0;
-      this.pesquisar();
+      if (this.grid.first === 0) {
+        this.pesquisar();
+      }
+      else {
+        this.grid.reset();
+      }
 
       this.messageService.add({
         severity: 'success',
