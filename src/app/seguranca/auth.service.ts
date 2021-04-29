@@ -53,6 +53,11 @@ export class AuthService {
       });
   }
 
+  limparAccessToken(): void {
+    localStorage.removeItem('token');
+    this.jwtPayload = null;
+  }
+
   temPermissao(permissao: string): boolean {
     return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
   }

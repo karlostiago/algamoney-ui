@@ -1,3 +1,5 @@
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { LogoutService } from './../../seguranca/logout.service';
 import { AuthService } from './../../seguranca/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -13,7 +15,9 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private logoutService: LogoutService,
+    private errorHandlerService: ErrorHandlerService,
   ) { }
 
   ngOnInit(): void {
@@ -33,5 +37,14 @@ export class NavbarComponent implements OnInit {
 
   criarNovoAccessToken(): void {
     this.authService.obterNovoAccessToken();
+  }
+
+  logout(): void {
+    this.logoutService.logout()
+      .then(() => {
+        this.router.navigate([ '/login' ]);
+        this.exibirMenu = false;
+      })
+      .catch(erro => this.errorHandlerService.handle(erro));
   }
 }

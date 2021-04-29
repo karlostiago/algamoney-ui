@@ -7,6 +7,7 @@ import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 
+import { LogoutService } from './logout.service';
 import { MoneyHttpInterceptor } from './money-http-interceptor';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { SegurancaRountingModule } from './seguranca-routing.module';
@@ -39,6 +40,7 @@ export function tokenGetter(): string {
   ],
   providers: [
     JwtHelperService,
+    LogoutService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
