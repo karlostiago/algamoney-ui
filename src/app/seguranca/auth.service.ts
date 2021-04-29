@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -7,7 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  url = 'http://localhost:8080/oauth/token';
+  url: string;
   jwtPayload: any;
 
   constructor(
@@ -15,6 +16,7 @@ export class AuthService {
     private jwtHelper: JwtHelperService
   ) {
     this.carregarToken();
+    this.url = `${environment.apiURL}/oauth/token`;
   }
 
   async login(usuario: string, senha: string): Promise<void> {

@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AbstractService } from '../core/AbstractService';
@@ -7,9 +8,12 @@ import { AbstractService } from '../core/AbstractService';
 })
 export class CategoriaService extends AbstractService {
 
-  url = 'http://localhost:8080/categorias';
+  url: string;
 
-  constructor(private http: HttpClient) { super(); }
+  constructor( private http: HttpClient ) {
+    super();
+    this.url = `${environment.apiURL}/categorias`;
+  }
 
   async todas(): Promise<any> {
     return this.http.get(this.url, this.httpOptions())

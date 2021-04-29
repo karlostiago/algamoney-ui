@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Endereco } from './../core/models/Endereco.model';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -15,9 +16,12 @@ export class PessoaFiltro {
 })
 export class PessoaService extends AbstractService {
 
-  url = 'http://localhost:8080/pessoas';
+  url: string;
 
-  constructor( private http: HttpClient ) { super(); }
+  constructor( private http: HttpClient ) {
+    super();
+    this.url = `${environment.apiURL}/pessoas`;
+  }
 
   async atualizar(pessoa: Pessoa): Promise<Pessoa> {
     return this.http.put(`${this.url}/${pessoa.codigo}`, this.getPessoaDto(pessoa), this.httpOptions())
