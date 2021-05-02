@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LancamentosRoutingModule } from './lancamentos-routing.module';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
@@ -39,7 +39,8 @@ import { SharedModule } from '../shared/shared.module';
     InputMaskModule,
     FormsModule,
     SharedModule,
-    LancamentosRoutingModule
+    LancamentosRoutingModule,
+    ReactiveFormsModule
   ],
   exports: []
 })
