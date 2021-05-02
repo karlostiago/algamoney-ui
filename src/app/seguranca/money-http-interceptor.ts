@@ -32,8 +32,8 @@ export class MoneyHttpInterceptor implements HttpInterceptor {
 
             return next.handle(request);
           })
-        );
-    }
+          );
+        }
 
     return next.handle(request);
   }
